@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapa de Paraderos</title>
+    <style>
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNo1J5CklTgfuwMGcNgsEbp9XS_Abhqnk&callback=initMap" async defer></script>
+    <script>
+      function initMap() {
+        const centerCoords = { lat: -33.45, lng: -70.65 };  // Coordenadas centrales (ajusta según sea necesario)
+        const map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: centerCoords
+        });
+
+        const paraderos = {{ paraderos_json|safe }};
+
+        paraderos.forEach(paradero => {
+          const marker = new google.maps.Marker({
+            position: { lat: paradero.coords[0], lng: paradero.coords[1] },
+            map: map,
+            title: paradero.name
+          });
+
+          const infowindow = new google.maps.InfoWindow({
+            content: `<div><strong>${paradero.name}</strong><br>${paradero.description}</div>`
+          });
+
+          marker.addListener('click', () => {
+            infowindow.open(map, marker);
+          });
+        });
+    }
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
