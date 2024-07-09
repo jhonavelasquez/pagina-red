@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from google.cloud import bigquery
 import re
-import json  # Asegúrate de importar el módulo json
+import json
 
 def map_view(request):
     # Configura el cliente de BigQuery
