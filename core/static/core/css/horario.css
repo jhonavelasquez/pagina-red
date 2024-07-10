@@ -1,0 +1,14 @@
+#rutas{
+    color: white;
+    padding-top: 100px;
+    background-color: #212529;
+    display: flex !important;
+    justify-content: flex-start !important;
+}
+
+#select{
+    width: 25%;
+    display: flex !important;
+    justify-content: center !important;
+    padding: 1%;
+}

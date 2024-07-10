@@ -1,0 +1,78 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Página de Rutas {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="static\core\css\index.css" />
+{% endblock %}
+
+{% block menu %}
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="{% url 'map_view' %}">Rutas Actuales</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'schedule_view' %}">Horarios</a>
+  </li>
+{% endblock %}
+{% block content %}
+<div>
+    <img src="static\core\img\persona_viajando.jpg" alt="persona_viajando" width="100%">
+    <div id="contenedor-1">
+        <div id="contenedor-2">
+            <h1>
+                Red Metropolitana de Movilidad
+            </h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, tempora neque! Deleniti qui id, tempore provident expedita repudiandae consequuntur alias impedit in, earum laborum, iusto facere dolorum sunt cumque aspernatur! Beatae, vero! Temporibus modi minus quos eius repellat recusandae, pariatur consectetur, rem accusamus sed unde corrupti facilis optio, doloremque qui aliquid minima! Veritatis, iste architecto! Explicabo, et corporis voluptatibus commodi iure autem cum modi iusto pariatur odit? Labore architecto autem tenetur nobis iure odio quia. Aliquid voluptates explicabo vitae quas autem ut, laborum nisi velit error ab nulla beatae, soluta minus sit voluptate, esse expedita aperiam? Voluptatum molestias corrupti repellat. Fuga eius dolorem cum dolores laudantium expedita explicabo, a ab nulla illum natus ea quam, magnam eligendi laboriosam neque. Alias velit incidunt esse non dolore voluptates culpa rerum, officia, ut quo dolores? Autem iusto nisi mollitia magnam debitis atque alias voluptates eius, voluptatum ipsam doloribus perferendis excepturi ab temporibus ratione.
+            </p>
+
+            <div id="targetas" class="row row-cols-1 row-cols-md-3 g-1">
+                <div class="col">
+                  <div class="card h-100">
+                    <button >
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a n</p>
+                        </div>
+                    </button>
+                  </div>
+                </div>
+                <div class="card h-100">
+                    <div class="card h-100">
+                        <button >
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a n</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <button>
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a longer card with supporting text below </p>
+                            </div>
+                        </button>
+                      </div>
+                </div>
+                
+              </div>
+
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo ullam optio libero iste illum porro culpa minus totam asperiores magnam voluptates et, maxime quas ab. Sed repudiandae sint ratione?
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores eius vero magnam molestias cumque sed eveniet soluta, excepturi deleniti voluptas, temporibus consequatur veniam pariatur molestiae placeat illum praesentium. Sint accusamus eius labore aliquid. Voluptatem quidem quas autem necessitatibus aliquam soluta eaque ut id quam fugiat. Est exercitationem cumque doloremque aut illo quae beatae pariatur. Blanditiis laborum nostrum fugiat expedita doloribus mollitia deleniti a est excepturi modi itaque dignissimos nemo, consequatur ab tenetur. Voluptates quo nisi sed repudiandae quisquam. Minus quibusdam perspiciatis at natus eum, asperiores repellendus aut, corrupti modi perferendis magnam aperiam accusantium eligendi fugiat mollitia molestiae dolore explicabo beatae.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

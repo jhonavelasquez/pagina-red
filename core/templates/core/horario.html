@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Página de Horario {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="static\core\css\horario.css" />
+{% endblock %}
+
+{% block menu %}
+<li class="nav-item">
+    <a class="nav-link" aria-current="page" href="{% url 'index' %}">Inicio</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="{% url 'map_view' %}">Rutas Actuales</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'schedule_view' %}">Horarios</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div id="rutas">
+    <div>
+        <h1>Horarios de Rutas</h1>
+    </div>
+    <form id="select" method="get" action="{% url 'schedule_view' %}">
+        <select id="codsint" name="codsint" class="form-select form-select-sm" aria-label="Small select example">
+            <option selected>Selecciona una Ruta</option>
+            {% for codsint in codsint_choices %}
+                <option value="{{ codsint }}" {% if codsint == codsint_filter %}selected{% endif %}>{{ codsint }}</option>
+            {% endfor %}
+          </select>
+        <button type="submit">Filtrar</button>
+    </form>
+</div>
+<div class="container table-container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>CódSint</th>
+                <th>Tipo de Día</th>
+                <th>Hora de Inicio</th>
+                <th>Hora de Fin</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for horario in horarios %}
+            <tr>
+                <td>{{ horario.codsint }}</td>
+                <td>{{ horario.tipo_dia }}</td>
+                <td>{{ horario.inicio }}</td>
+                <td>{{ horario.fin }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+    
+

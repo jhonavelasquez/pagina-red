@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!a!i!mh4t18feerc34t-f%!c&3u6u(kt-hhf3vvgs25+!!q=nt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['jhonavl.pythonanywhere.com']
 
 
 # Application definition
@@ -124,3 +124,11 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Google Cloud credentials
+GOOGLE_APPLICATION_CREDENTIALS = os.path.join(BASE_DIR, 'project-red-423402-762f6b98bf33.json')
+
+if os.path.exists(GOOGLE_APPLICATION_CREDENTIALS):
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_APPLICATION_CREDENTIALS
+
+# Add other production settings as needed
