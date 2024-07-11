@@ -2,7 +2,7 @@
 
 {% block title %} Página de Horario {% endblock %}
 {% block head %}
-<link rel="stylesheet" href="static\core\css\horario.css" />
+<link rel="stylesheet" href="static\core\css\horario1.css" />
 {% endblock %}
 
 {% block menu %}
@@ -18,6 +18,18 @@
 {% endblock %}
 
 {% block content %}
+
+<div id="description">
+    <p>
+        Explora la red integrada de transporte público de Santiago de Chile con Red Metropolitana de Movilidad.
+        Nuestra plataforma te permite visualizar las rutas disponibles y los horarios precisos para cada día de la semana,
+        incluyendo fines de semana y feriados. Con nuestra herramienta interactiva,
+        puedes filtrar fácilmente por las distintas rutas, asegurándote de encontrar los horarios que se ajusten a tus necesidades.
+        <br> <br>
+        Únete a nosotros en Red Metropolitana de Movilidad y simplifica tu día a día con una plataforma que te proporciona
+        acceso rápido y preciso a todos los horarios de transporte público en Santiago.
+    </p>
+</div>
 <div id="rutas">
     <div>
         <h1>Horarios de Rutas</h1>
@@ -54,6 +66,8 @@
         </tbody>
     </table>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 {% endblock %}
 
     

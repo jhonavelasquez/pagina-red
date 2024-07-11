@@ -1,6 +1,15 @@
-#rutas{
+#description{
     color: white;
-    padding-top: 100px;
+    padding: 3% 10% 0% 10%;
+    background-color: #212529;
+    display: flex !important;
+    justify-content: flex-start !important;
+    text-align: justify;
+ }
+
+#rutas{
+    padding: 0% 10% 0% 10%;
+    color: white;
     background-color: #212529;
     display: flex !important;
     justify-content: flex-start !important;
@@ -12,3 +21,4 @@
     justify-content: center !important;
     padding: 1%;
 }
+

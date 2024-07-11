@@ -8,13 +8,13 @@
 {% block menu %}
 <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
-  </li>
-  <li class="nav-item">
+</li>
+<li class="nav-item">
     <a class="nav-link" aria-current="page" href="{% url 'map_view' %}">Rutas Actuales</a>
-  </li>
-  <li class="nav-item">
+</li>
+<li class="nav-item">
     <a class="nav-link" href="{% url 'schedule_view' %}">Horarios</a>
-  </li>
+</li>
 {% endblock %}
 {% block content %}
 <div>
@@ -25,54 +25,55 @@
                 Red Metropolitana de Movilidad
             </h1>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, tempora neque! Deleniti qui id, tempore provident expedita repudiandae consequuntur alias impedit in, earum laborum, iusto facere dolorum sunt cumque aspernatur! Beatae, vero! Temporibus modi minus quos eius repellat recusandae, pariatur consectetur, rem accusamus sed unde corrupti facilis optio, doloremque qui aliquid minima! Veritatis, iste architecto! Explicabo, et corporis voluptatibus commodi iure autem cum modi iusto pariatur odit? Labore architecto autem tenetur nobis iure odio quia. Aliquid voluptates explicabo vitae quas autem ut, laborum nisi velit error ab nulla beatae, soluta minus sit voluptate, esse expedita aperiam? Voluptatum molestias corrupti repellat. Fuga eius dolorem cum dolores laudantium expedita explicabo, a ab nulla illum natus ea quam, magnam eligendi laboriosam neque. Alias velit incidunt esse non dolore voluptates culpa rerum, officia, ut quo dolores? Autem iusto nisi mollitia magnam debitis atque alias voluptates eius, voluptatum ipsam doloribus perferendis excepturi ab temporibus ratione.
+
+                Como Red Metropolitana de Movilidad en Santiago, nuestro objetivo es conectar eficientemente a todos los
+                habitantes y visitantes de la ciudad. Nuestra red integrada de transporte público une buses, metro y
+                trenes suburbanos en un sistema coordinado que facilita los desplazamientos diarios.En Red Metropolitana
+                de Movilidad, estamos comprometidos con mejorar la vida cotidiana de nuestros
+                usuarios, proporcionando un sistema de transporte público que sea confiable, eficiente y amigable con el
+                medio ambiente.
             </p>
 
-            <div id="targetas" class="row row-cols-1 row-cols-md-3 g-1">
-                <div class="col">
-                  <div class="card h-100">
-                    <button >
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a n</p>
-                        </div>
-                    </button>
-                  </div>
-                </div>
-                <div class="card h-100">
+            <div id="targetas" class="row row-cols-1 row-cols-md-2 g-1 justify-content-center">
+                <div class="col col-md-4">
                     <div class="card h-100">
-                        <button >
-                            <img src="..." class="card-img-top" alt="...">
+                        <a id="link-card" href="{% url 'map_view' %}">
+                            <img id="icon" src="static\core\img\icon_map.png" class="card-img-top" alt="icon_map">
                             <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a n</p>
+                                <h5 class="card-title">Mapa de Rutas</h5>
+                                <p class="card-text">¡Explora las rutas y paradas disponibles!</p>
                             </div>
-                        </button>
+                        </a>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col col-md-4">
                     <div class="card h-100">
-                        <button>
-                            <img src="..." class="card-img-top" alt="...">
+                        <a id="link-card" href="{% url 'schedule_view' %}">
+                            <img id="icon" src="static\core\img\icon_horario.png" class="card-img-top"
+                                alt="icon_horario">
                             <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below </p>
+                                <h5 class="card-title">Horarios</h5>
+                                <p class="card-text">¡Organiza tus tiempos con nuestros horarios!</p>
                             </div>
-                        </button>
-                      </div>
+                        </a>
+                    </div>
                 </div>
-                
-              </div>
+            </div>
+
 
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque explicabo ullam optio libero iste illum porro culpa minus totam asperiores magnam voluptates et, maxime quas ab. Sed repudiandae sint ratione?
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores eius vero magnam molestias cumque sed eveniet soluta, excepturi deleniti voluptas, temporibus consequatur veniam pariatur molestiae placeat illum praesentium. Sint accusamus eius labore aliquid. Voluptatem quidem quas autem necessitatibus aliquam soluta eaque ut id quam fugiat. Est exercitationem cumque doloremque aut illo quae beatae pariatur. Blanditiis laborum nostrum fugiat expedita doloribus mollitia deleniti a est excepturi modi itaque dignissimos nemo, consequatur ab tenetur. Voluptates quo nisi sed repudiandae quisquam. Minus quibusdam perspiciatis at natus eum, asperiores repellendus aut, corrupti modi perferendis magnam aperiam accusantium eligendi fugiat mollitia molestiae dolore explicabo beatae.
+                Nuestra misión es proporcionar una experiencia de viaje fluida y accesible para todos. Con tarifas
+                integradas y opciones de pago electrónico, simplificamos el acceso al transporte público. Coordinamos
+                horarios y rutas para minimizar tiempos de espera y maximizar la eficiencia de cada viaje, adaptándonos
+                a las necesidades de movilidad de nuestros usuarios.
+                <br><br>
+                Promovemos una movilidad urbana sostenible al reducir la congestión vehicular y las emisiones de gases,
+                contribuyendo así a la mejora de la calidad del aire en la ciudad. Nuestra red está diseñada para
+                ofrecer opciones accesibles y seguras, haciendo que Santiago sea más conectado y habitable para todos.
             </p>
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 {% endblock %}

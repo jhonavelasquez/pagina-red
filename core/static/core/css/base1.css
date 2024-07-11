@@ -1,0 +1,37 @@
+/* Estilos para el contenido principal */
+#content {
+    padding-top: 2%; /* Añade espacio para que el contenido no se solape con la barra de menú fija */
+}
+
+/* Estilos adicionales para la barra de menú fija */
+.fixed-top {
+    z-index: 1000; /* Asegura que la barra de menú fija esté por encima de otros elementos */
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: #343a40; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco */
+    border-top: 1px dashed #ffffff; /* Línea blanca superior */
+}
+
+#contacto {
+    padding-top: 2%; /* Espaciado superior */
+}
+
+#row-footer{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#contacto p {
+    margin-bottom: 5px; /* Márgenes inferiores para los párrafos */
+    text-align: center;
+}
+
+.text-center {
+    text-align: center; /* Alinear texto al centro */
+}

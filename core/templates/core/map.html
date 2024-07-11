@@ -2,7 +2,9 @@
 
 {% block title %} Página de Rutas {% endblock %}
 {% block head %}
-<link rel="stylesheet" href="static\core\css\map1.css" />
+<link rel="stylesheet" href="static\core\css\map.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 {% endblock %}
 
 {% block menu %}
@@ -18,8 +20,22 @@
 {% endblock %}
 {% block content %}
     <!-- Dropdown para filtrar por codsint -->
-    
+    <div id="description">
+        <p>
+            Explora la red integrada de transporte público de Santiago de Chile con Red
+            Metropolitana de Movilidad. Nuestra plataforma te permite visualizar fácilmente 
+            las rutas disponibles a través de un mapa interactivo. Con solo unos clics, podrás 
+            descubrir las paradas detalladas, indicando claramente si pertenecen al recorrido de
+            ida o regreso. Además, cada parada te proporciona información crucial como el nombre
+            de la comuna y las avenidas cercanas, garantizando que tengas acceso a toda la información
+            necesaria para planificar tu viaje de manera eficiente.
+            <br><br>
+            Únete a nosotros en Red Metropolitana de Movilidad y descubre una nueva forma de navegar por Santiago,
+            facilitando tus desplazamientos diarios con nuestra red moderna y eficiente.
+        </p>
+    </div>
      <div id="rutas">
+        
         <div>
             <h1>Rutas y Paradas</h1>
         </div>

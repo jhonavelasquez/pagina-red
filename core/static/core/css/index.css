@@ -25,3 +25,33 @@ p{
     border: 0;
     padding: 1% 5% 1% 5%;
 }
+
+
+#link-card{
+    background-color: #C8102E;
+    border: 10% ;
+    height: 100%;
+    border-radius: 5%;
+    text-decoration: none;
+    text-decoration: none !important; /* Quitar el subrayado */
+    color: white !important; /* Heredar el color del texto normal */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-title, .card-text{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#icon{
+    margin: 5%;
+    width: 60px !important;
+}
+
+p{
+    text-align: justify;
+}

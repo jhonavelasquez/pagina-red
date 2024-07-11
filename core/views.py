@@ -7,7 +7,7 @@ def index(request):
     return render(request, 'core/index.html')
 
 def map_view(request):
-    # Obtener el valor de codsint filtrado desde la solicitud GET o usar '101' por defecto
+    # Obtener el valor de codsint filtrado desde la solicitud GET o usar 'None' por defecto
     codsint_filter = request.GET.get('codsint')
 
     # Configurar el cliente de BigQuery
@@ -23,57 +23,64 @@ def map_view(request):
 
     # Lista de codsint disponibles para el dropdown
     codsint_choices = [row.codsint for row in codsint_rows]
+    codsint_choices = sorted(codsint_choices, key=lambda x: (x.isdigit(), x))  # Ordenar los codsint
 
-    # Consulta de BigQuery para obtener las rutas y paradas filtradas por codsint
-    query_paraderos = """
-    SELECT codsint, pos, name, cod, tipo_recorrido, comuna, color, type
-    FROM `project-red-423402.dataset_realtime.paraderos`
-    WHERE codsint = '{codsint_filter}'
-    """
-    query_paraderos = query_paraderos.format(codsint_filter=codsint_filter)
-    query_job_paraderos = client.query(query_paraderos)
-    rows = query_job_paraderos.result()
-
-    # Convertir los resultados en una lista de diccionarios
     paraderos = []
-    for row in rows:
-        # Parsear las coordenadas si vienen como un string
-        if isinstance(row.pos, str):
-            coords_match = re.match(r'\[(-?\d+\.\d+), (-?\d+\.\d+)\]', row.pos)
-            if coords_match:
-                coords = [float(coords_match.group(1)), float(coords_match.group(2))]
+    path_ida = []
+    path_regreso = []
+    color = '#3388ff'
+
+    if codsint_filter:
+        # Consulta de BigQuery para obtener las rutas y paradas filtradas por codsint
+        query_paraderos = """
+        SELECT codsint, pos, name, cod, tipo_recorrido, comuna, color, type
+        FROM `project-red-423402.dataset_realtime.paraderos`
+        WHERE codsint = '{codsint_filter}'
+        """
+        query_paraderos = query_paraderos.format(codsint_filter=codsint_filter)
+        query_job_paraderos = client.query(query_paraderos)
+        rows = query_job_paraderos.result()
+
+        # Convertir los resultados en una lista de diccionarios
+        for row in rows:
+            # Parsear las coordenadas si vienen como un string
+            if isinstance(row.pos, str):
+                coords_match = re.match(r'\[(-?\d+\.\d+), (-?\d+\.\d+)\]', row.pos)
+                if coords_match:
+                    coords = [float(coords_match.group(1)), float(coords_match.group(2))]
+                else:
+                    coords = [None, None]
             else:
                 coords = [None, None]
-        else:
-            coords = [None, None]
 
-        paraderos.append({
-            'codsint': row.codsint,
-            'coords': coords,
-            'name': row.name,
-            'code': row.cod,
-            'color': row.color,
-            'description': f"Recorrido de {row.tipo_recorrido}<br>En la comuna {row.comuna}<br>{row.color}"
-        })
+            paraderos.append({
+                'codsint': row.codsint,
+                'coords': coords,
+                'name': row.name,
+                'code': row.cod,
+                'color': row.color,
+                'description': f"Recorrido de {row.tipo_recorrido}<br>En la comuna {row.comuna}<br>{row.color}"
+            })
 
-    # Consulta de BigQuery para obtener el camino de la ruta
-    query_ruta = """
-    SELECT path_ida, path_regreso, color
-    FROM `project-red-423402.dataset_realtime.ruta`
-    WHERE codsint = '{codsint_filter}'
-    """
-    query_ruta = query_ruta.format(codsint_filter=codsint_filter)
-    query_job_ruta = client.query(query_ruta)
-    ruta_row = None
+        # Consulta de BigQuery para obtener el camino de la ruta
+        query_ruta = """
+        SELECT path_ida, path_regreso, color
+        FROM `project-red-423402.dataset_realtime.ruta`
+        WHERE codsint = '{codsint_filter}'
+        """
+        query_ruta = query_ruta.format(codsint_filter=codsint_filter)
+        query_job_ruta = client.query(query_ruta)
+        ruta_row = None
 
-    # Iterar sobre los resultados de la consulta para obtener el primer resultado
-    for row in query_job_ruta.result():
-        ruta_row = row
-        break
+        # Iterar sobre los resultados de la consulta para obtener el primer resultado
+        for row in query_job_ruta.result():
+            ruta_row = row
+            break
 
-    path_ida = json.loads(ruta_row.path_ida) if ruta_row and ruta_row.path_ida else []
-    path_regreso = json.loads(ruta_row.path_regreso) if ruta_row and ruta_row.path_regreso else []
-    color = ruta_row.color if ruta_row and ruta_row.color else '#3388ff'
+        if ruta_row:
+            path_ida = json.loads(ruta_row.path_ida) if ruta_row.path_ida else []
+            path_regreso = json.loads(ruta_row.path_regreso) if ruta_row.path_regreso else []
+            color = ruta_row.color if ruta_row.color else '#3388ff'
 
     context = {
         'paraderos_json': json.dumps(paraderos),  # Convertir la lista a JSON para usar en la plantilla
@@ -81,7 +88,7 @@ def map_view(request):
         'path_regreso': json.dumps(path_regreso),
         'ruta_color': color,
         'codsint_filter': codsint_filter,  # Mantener el valor de codsint seleccionado para el dropdown
-        'codsint_choices': codsint_choices,  # Lista de todos los codsint disponibles
+        'codsint_choices': codsint_choices,  # Lista de todos los codsint disponibles, ordenada
     }
 
     return render(request, 'core/map.html', context)
@@ -126,6 +133,7 @@ def schedule_view(request):
 
     # Lista de codsint disponibles para el dropdown
     codsint_choices = [row.codsint for row in codsint_rows]
+    codsint_choices = sorted(codsint_choices, key=lambda x: (x.isdigit(), x))  # Ordenar los codsint
 
     context = {
         'horarios': horarios,
