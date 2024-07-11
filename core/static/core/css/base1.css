@@ -1,3 +1,12 @@
+.navbar-brand{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span{
+    padding-left: 1%;
+}
 /* Estilos para el contenido principal */
 #content {
     padding-top: 2%; /* Añade espacio para que el contenido no se solape con la barra de menú fija */
@@ -20,7 +29,6 @@ footer {
 }
 
 #row-footer{
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,4 +42,25 @@ footer {
 
 .text-center {
     text-align: center; /* Alinear texto al centro */
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 767.98px) {
+    #contenedor-1 {
+        padding: 5% 5% 5% 5%;
+    }
+
+    #content {
+        padding-top: 10%;
+    }
+
+    #row-footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer {
+        padding: 2%;
+    }
 }
