@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Página de Rutas {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="static\core\css\historicos.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+{% endblock %}
+
+{% block menu %}
+<li class="nav-item">
+    <a class="nav-link" aria-current="page" href="{% url 'index' %}">Inicio</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" aria-current="page" href="{% url 'map_view' %}">Rutas Actuales</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'schedule_view' %}">Horarios</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="{% url 'historico_view' %}">Rutas Historicas</a>
+</li>
+{% endblock %}
+{% block content %}
+    <!-- Dropdown para filtrar por codsint -->
+    <div id="description">
+        <br>
+    </div>
+    <div id="shapes">
+        <div>
+            <h1>Rutas Historicas</h1>
+        </div>
+            <form id="select" method="get" action="{% url 'historico_view' %}">
+                <select id="shape_id" name="shape_id" class="form-select form-select-sm" aria-label="Small select example">
+                    <option selected>Selecciona un Shape</option>
+                    {% for shape_id in shape_id_choices %}
+                        <option value="{{ shape_id }}" {% if shape_id == shape_id_filter %}selected{% endif %}>{{ shape_id }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Filtrar</button>
+            </form>
+    </div>
+    <div id="contenedorMAP">
+        <div id="map"></div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var map = L.map('map').setView([-33.45, -70.65], 12);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var shapes = {{ shapes_json|safe }};
+            var shapeColor = "#FF0000"; // Color para los shapes
+
+            var shapePoints = shapes.map(function(shape) {
+                return shape.coords;
+            });
+
+            if (shapePoints.length > 0) {
+                L.polyline(shapePoints, {color: shapeColor}).addTo(map);
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+{% endblock %}

@@ -7,7 +7,7 @@
     text-align: justify;
  }
 
-#rutas{
+#shapes{
     padding: 0% 10% 0% 10%;
     color: white;
     background-color: #212529;
@@ -21,7 +21,6 @@
     justify-content: center !important;
     padding: 1%;
 }
-
 
 #map{
     display: flex !important;

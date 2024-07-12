@@ -2,6 +2,10 @@ from django.shortcuts import render
 from google.cloud import bigquery
 import re
 import json
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 def index(request):
     return render(request, 'core/index.html')
@@ -142,3 +146,55 @@ def schedule_view(request):
     }
 
     return render(request, 'core/horario.html', context)
+
+def historico_view(request):
+    # Obtener el valor de shape_id filtrado desde la solicitud GET o usar 'None' por defecto
+    shape_id_filter = request.GET.get('shape_id')
+
+    # Configurar el cliente de BigQuery
+    client = bigquery.Client()
+
+    # Consulta de BigQuery para obtener los shape_id disponibles
+    query_shape_ids = """
+    SELECT DISTINCT shape_id
+    FROM `project-red-423402.dataset_historicos.Shapes`
+    """
+    query_job_shape_ids = client.query(query_shape_ids)
+    shape_id_rows = query_job_shape_ids.result()
+
+    # Lista de shape_id disponibles para el dropdown
+    shape_id_choices = [row.shape_id for row in shape_id_rows]
+
+    shapes = []
+
+    if shape_id_filter:
+        logger.debug(f"Filtrando por shape_id: {shape_id_filter}")
+
+        # Consulta de BigQuery para obtener las coordenadas del shape_id filtrado
+        query_shapes = """
+        SELECT shape_id, shape_pt_lat, shape_pt_lon, shape_pt_sequence
+        FROM `project-red-423402.dataset_historicos.Shapes`
+        WHERE shape_id = '{shape_id_filter}'
+        ORDER BY shape_pt_sequence
+        """
+        query_shapes = query_shapes.format(shape_id_filter=shape_id_filter)
+        query_job_shapes = client.query(query_shapes)
+        rows = query_job_shapes.result()
+
+        # Convertir los resultados en una lista de diccionarios
+        for row in rows:
+            shapes.append({
+                'shape_id': row.shape_id,
+                'coords': [row.shape_pt_lat, row.shape_pt_lon],
+                'sequence': row.shape_pt_sequence
+            })
+
+        logger.debug(f"Shape encontrado: {shapes}")
+
+    context = {
+        'shapes_json': json.dumps(shapes),  # Convertir la lista a JSON para usar en la plantilla
+        'shape_id_filter': shape_id_filter,  # Mantener el valor de shape_id seleccionado para el dropdown
+        'shape_id_choices': shape_id_choices,  # Lista de todos los shape_id disponibles
+    }
+
+    return render(request, 'core/historico.html', context)
